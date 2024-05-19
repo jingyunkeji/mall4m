@@ -100,10 +100,13 @@ Page({
     this.getNoticeList();
     this.getTag();
   },
+  /**
+   * 获取主页数据
+   */
   getHomeData() {
     const that = this;
     wx.request({
-      url: 'https://cdn.jsdelivr.net/gh/jingyunkeji/data/putian-wechat-mall.json',
+      url: 'https://cdn.jsdelivr.net/gh/jingyunkeji/data@main/putian-wechat-mall.json',
       success(res) {
         const { title, notice, summary, video, wechat, wechatImage } = res.data;
 
@@ -111,6 +114,33 @@ Page({
         wx.setNavigationBarTitle({ title });
       }
     });
+  },
+  saveWechatImage() {
+    wx.showLoading({ title: '下载图片中', mask: true });
+    wx.downloadFile({
+      url: this.data.wechatImage,
+      success(res) {
+        console.log(res);
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success() {
+            wx.hideLoading();
+            wx.showToast({
+              title: '保存图片成功',
+            });
+          },
+          fail() {
+            wx.hideLoading();
+          }
+        })
+      }
+    });
+  },
+  /**
+   * 复制微信号
+   */
+  copyWechat() {
+    wx.setClipboardData({ data: this.data.wechat });
   },
   //加载轮播图
   getIndexImgs() {

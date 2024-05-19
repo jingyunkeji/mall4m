@@ -2,20 +2,20 @@
 <view class="container">
   <van-notice-bar left-icon="volume-o" text="{{notice}}" />
 
-  <video class="video-full" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" autoplay loop></video>
+  <video class="video-full" src="{{ video }}" autoplay loop muted></video>
 
   <view class="wechat-content">
     <text class="flex-center mx-1 summary">{{ summary }}</text>
 
     <view class="flex-center mx-1">
-      <image class="wechat-image" src="{{wechatImage}}" />
+      <image class="wechat-image" src="{{wechatImage}}" mode="aspectFit" />
     </view>
 
     <text class="flex-center mx-1 wechat">微信号：{{wechat}}</text>
 
     <view class="button-group">
-      <button type="primary" plain="true">保存客服二维码图片</button>
-      <button type="default" plain="true">复制客服微信号</button>
+      <button type="primary" plain="true" bind:touchend="saveWechatImage">保存客服二维码图片</button>
+      <button type="default" plain="true" bind:touchend="copyWechat">复制客服微信号</button>
     </view>
   </view>
 

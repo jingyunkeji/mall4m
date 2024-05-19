@@ -462,6 +462,7 @@ swiper.pic-swiper .banner {
 
 .video-full {
   width: 100%;
+  height: 30rem;
 }
 
 .flex-center {
@@ -483,7 +484,7 @@ swiper.pic-swiper .banner {
 }
 
 .wechat-content .wechat-image {
-  object-fit: cover;
+  padding: 0 5rem;
 }
 
 .wechat-content .button-group {
