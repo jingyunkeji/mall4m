@@ -1,5 +1,6 @@
 //index.js
 //获取应用实例
+import { homeDomain } from "../../utils/config";
 var http = require("../../utils/http.js");
 var config = require("../../utils/config.js");
 const app = getApp()
@@ -22,6 +23,7 @@ Page({
     video: "",
     wechat: "",
     wechatImage: "",
+    wechatShow: true,
   },
   //事件处理函数
   bindViewTap: function() {
@@ -106,11 +108,11 @@ Page({
   getHomeData() {
     const that = this;
     wx.request({
-      url: 'https://cdn.jsdelivr.net/gh/jingyunkeji/data@main/putian-wechat-mall.json',
+      url: `${homeDomain}/putian-wechat-mall.json`,
       success(res) {
-        const { title, notice, summary, video, wechat, wechatImage } = res.data;
+        const { title, notice, summary, video, wechat, wechatImage, wechatShow } = res.data;
 
-        that.setData({ title, notice, summary, video, wechat, wechatImage });
+        that.setData({ title, notice, summary, video, wechat, wechatImage, wechatShow });
         wx.setNavigationBarTitle({ title });
       }
     });
