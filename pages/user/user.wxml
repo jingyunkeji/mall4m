@@ -66,7 +66,7 @@
     </view>
 
     <view class='my-menu'>
-      <view class='memu-item' bindtap='toDistCenter'>
+      <!-- <view class='memu-item' bindtap='toDistCenter'>
         <view class="i-name">
           <image src='../../images/icon/promotion.png'></image>
           <text>分销中心</text>
@@ -86,7 +86,7 @@
           <text>我的优惠券</text>
         </view>
         <view class='arrowhead'></view>
-      </view>
+      </view> -->
       <view class='memu-item' bindtap='toAddressList'>
         <view class="i-name">
           <image src='../../images/icon/myAddr.png'></image>
