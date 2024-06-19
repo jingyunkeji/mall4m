@@ -1,16 +1,32 @@
 /* pages/login/login.wxss */
+.avatar-wrapper {
+  padding: 0;
+  width: 56px !important;
+  border-radius: 8px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
 
+.avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
 
-image {
+.container {
+  display: flex;
+}
+
+/* image {
   display: block;
   width: 150rpx;
   height: 150rpx;
   margin: auto;
   margin-top: 100rpx;
   border-radius: 50%;
-}
+} */
 
-view.msg {
+/* view.msg {
   font-size: 24rpx;
   color: #666;
   width: 100%;
@@ -130,10 +146,10 @@ page{
 
 button::after{
   border: 0 !important;
-}
+} */
 
 /* 去注册 */
-.operate {
+/* .operate {
 	display: flex;
 	justify-content: space-between;
   align-items: center;
@@ -143,4 +159,4 @@ button::after{
 .to-register {
 	font-size: 28rpx;
 	color: #00AAFF;
-}
+} */

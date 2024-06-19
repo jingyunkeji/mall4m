@@ -3,13 +3,13 @@
 import { homeDomain } from "../../utils/config";
 var http = require("../../utils/http.js");
 var config = require("../../utils/config.js");
-const app = getApp()
+const app = getApp();
 
 Page({
   data: {
     indicatorDots: true,
-    indicatorColor: '#d1e5fb',
-    indicatorActiveColor: '#1b7dec',
+    indicatorColor: "#d1e5fb",
+    indicatorActiveColor: "#1b7dec",
     autoplay: true,
     interval: 2000,
     duration: 1000,
@@ -26,75 +26,61 @@ Page({
     wechatShow: true,
   },
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
-      url: '../logs/logs'
-    })
+      url: "../logs/logs",
+    });
   },
-  onLoad: function() {
+  onLoad: function () {
     this.getAllData();
   },
 
   // 页面滚动到指定位置指定元素固定在顶部
-  onPageScroll: function(e) { //监听页面滚动
+  onPageScroll: function (e) {
+    //监听页面滚动
     this.setData({
-      scrollTop: e.scrollTop
-    })
+      scrollTop: e.scrollTop,
+    });
   },
 
-  toProdPage: function(e) {
+  toProdPage: function (e) {
     var prodid = e.currentTarget.dataset.prodid;
     if (prodid) {
       wx.navigateTo({
-        url: '/pages/prod/prod?prodid=' + prodid,
-      })
+        url: "/pages/prod/prod?prodid=" + prodid,
+      });
     }
   },
 
-  toCouponCenter: function() {
-    wx.showToast({
-      icon:"none",
-      title: '该功能未开源'
-    })
-  },
-
   // 跳转搜索页
-  toSearchPage: function() {
+  toSearchPage: function () {
     wx.navigateTo({
-      url: '/pages/search-page/search-page',
-    })
+      url: "/pages/search-page/search-page",
+    });
   },
 
   //跳转商品活动页面
-  toClassifyPage: function(e) {
-    var url = '/pages/prod-classify/prod-classify?sts=' + e.currentTarget.dataset.sts;
+  toClassifyPage: function (e) {
+    var url =
+      "/pages/prod-classify/prod-classify?sts=" + e.currentTarget.dataset.sts;
     var id = e.currentTarget.dataset.id;
     var title = e.currentTarget.dataset.title;
     if (id) {
       url += "&tagid=" + id + "&title=" + title;
     }
     wx.navigateTo({
-      url: url
-    })
-  },
-
-  //跳转限时特惠页面
-  toLimitedTimeOffer: function(e) {
-    wx.showToast({
-      icon:"none",
-      title: '该功能未开源'
-    })
+      url: url,
+    });
   },
 
   //跳转公告列表页面
-  onNewsPage: function() {
+  onNewsPage: function () {
     wx.navigateTo({
-      url: '/pages/recent-news/recent-news',
-    })
+      url: "/pages/recent-news/recent-news",
+    });
   },
 
-  onShow: function() {
-  },
+  onShow: function () {},
   getAllData() {
     this.getHomeData();
     http.getCartCount(); //重新计算购物车总数量
@@ -110,15 +96,31 @@ Page({
     wx.request({
       url: `${homeDomain}/putian-wechat-mall.json`,
       success(res) {
-        const { title, notice, summary, video, wechat, wechatImage, wechatShow } = res.data;
+        const {
+          title,
+          notice,
+          summary,
+          video,
+          wechat,
+          wechatImage,
+          wechatShow,
+        } = res.data;
 
-        that.setData({ title, notice, summary, video, wechat, wechatImage, wechatShow });
+        that.setData({
+          title,
+          notice,
+          summary,
+          video,
+          wechat,
+          wechatImage,
+          wechatShow,
+        });
         wx.setNavigationBarTitle({ title });
-      }
+      },
     });
   },
   saveWechatImage() {
-    wx.showLoading({ title: '下载图片中', mask: true });
+    wx.showLoading({ title: "下载图片中", mask: true });
     wx.downloadFile({
       url: this.data.wechatImage,
       success(res) {
@@ -128,14 +130,14 @@ Page({
           success() {
             wx.hideLoading();
             wx.showToast({
-              title: '保存图片成功',
+              title: "保存图片成功",
             });
           },
           fail() {
             wx.hideLoading();
-          }
-        })
-      }
+          },
+        });
+      },
     });
   },
   /**
@@ -154,9 +156,9 @@ Page({
       callBack: (res) => {
         this.setData({
           indexImgs: res,
-          seq: res
+          seq: res,
         });
-      }
+      },
     };
     http.request(params);
   },
@@ -170,7 +172,7 @@ Page({
         this.setData({
           news: res,
         });
-      }
+      },
     };
     http.request(params);
   },
@@ -178,15 +180,15 @@ Page({
   /**
    * 加入购物车
    */
-   addToCart(e) {
-    const prodId = e.currentTarget.dataset.prodid
-    const ths = this
+  addToCart(e) {
+    const prodId = e.currentTarget.dataset.prodid;
+    const ths = this;
     wx.showLoading();
     var params = {
       url: "/prod/prodInfo",
       method: "GET",
       data: {
-        prodId
+        prodId,
       },
       callBack: (res) => {
         var params = {
@@ -197,26 +199,25 @@ Page({
             count: 1,
             prodId: res.prodId,
             shopId: res.shopId,
-            skuId: res.skuList[0].skuId
+            skuId: res.skuList[0].skuId,
           },
-          callBack: function(res) {
+          callBack: function (res) {
             ths.setData({
-              totalCartNum: ths.data.totalCartNum + ths.data.prodNum
+              totalCartNum: ths.data.totalCartNum + ths.data.prodNum,
             });
             wx.hideLoading();
             http.getCartCount(); //重新计算购物车总数量
             wx.showToast({
               title: "加入购物车成功",
-              icon: "none"
-            })
-          }
+              icon: "none",
+            });
+          },
         };
         http.request(params);
-      }
+      },
     };
     http.request(params);
   },
-
 
   // 加载商品标题分组列表
   getTag() {
@@ -231,7 +232,7 @@ Page({
         for (var i = 0; i < res.length; i++) {
           this.getTagProd(res[i].id, i);
         }
-      }
+      },
     };
     http.request(params);
   },
@@ -242,16 +243,16 @@ Page({
       method: "GET",
       data: {
         tagId: id,
-        size: 6
+        size: 6,
       },
       callBack: (res) => {
         var taglist = this.data.taglist;
-        taglist[index].prods = res.records
+        taglist[index].prods = res.records;
 
         this.setData({
           taglist: taglist,
         });
-      }
+      },
     };
     http.request(param);
   },
@@ -272,33 +273,29 @@ Page({
   //     })
   // },
 
-  onPullDownRefresh: function() {
-
+  onPullDownRefresh: function () {
     // wx.showNavigationBarLoading() //在标题栏中显示加载
 
     //模拟加载
     var ths = this;
-    setTimeout(function() {
-
+    setTimeout(function () {
       ths.getAllData();
 
       // wx.hideNavigationBarLoading() //完成停止加载
 
-      wx.stopPullDownRefresh() //停止下拉刷新
-
+      wx.stopPullDownRefresh(); //停止下拉刷新
     }, 100);
-
   },
 
   /**
    * 跳转至商品详情
    */
-  showProdInfo: function(e) {
+  showProdInfo: function (e) {
     let relation = e.currentTarget.dataset.relation;
     if (relation) {
       wx.navigateTo({
-        url: 'pages/prod/prod',
-      })
+        url: "pages/prod/prod",
+      });
     }
-  }
-})
+  },
+});

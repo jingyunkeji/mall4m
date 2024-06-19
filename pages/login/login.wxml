@@ -1,7 +1,21 @@
-<!--pages/login/login.wxml-->
-<image src='http://img-test.gz-yami.com/mini/logo.jpg' class='c-logo'></image>
-<view class="title">mall4j</view>
-<view class="login-form">
+<!-- pages/login/login.wxml -->
+<view data-weui-theme="{{theme}}">
+    <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+        <image class="avatar" src="{{avatarUrl}}"></image>
+    </button>
+    <mp-form>
+        <mp-cells>
+            <mp-cell title="昵称">
+                <input type="nickname" class="weui-input" placeholder="请输入昵称" />
+            </mp-cell>
+        </mp-cells>
+    </mp-form>
+    <button class="btn" type="primary" bindtap="handleLogin">登录</button>
+</view>
+<!-- <image src='http://img-test.gz-yami.com/mini/logo.jpg' class='c-logo'></image>
+<view class="title">mall4j</view> -->
+<!-- <view class="login-form">
+    <input type="nickname" class="weui-input" placeholder="请输入昵称" />
     <view class="item">
         <view class="account">
             <text class="input-item">用户名</text>
@@ -15,7 +29,9 @@
         </view>
     </view>
     <view>
-        <button class="authorized-btn" bindtap="handleLoginOrRegister">{{isRegister ? '注册': '登录'}}</button>
+        <button class="authorized-btn" bindtap="handleLoginOrRegister">
+            {{isRegister ? '注册': '登录'}}
+        </button>
         <button class="to-idx-btn" bindtap="goBack">回到首页</button>
     </view>
     <view class="operate">
@@ -23,4 +39,4 @@
             {{isRegister?'已有账号？去登录>' : '没有账号？去注册>'}}
         </view>
     </view>
-</view>
+</view> -->
