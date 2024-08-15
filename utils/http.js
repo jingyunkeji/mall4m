@@ -1,4 +1,4 @@
-import { handleLogin, handleLoginTest } from "./login";
+import { handleLogin } from "./login";
 
 var config = require("config.js");
 
@@ -34,13 +34,7 @@ function request(params, isGetTonken) {
 
       // A00004 未授权
       if (responseData.code === 'A00004') {
-        handleLoginTest()
-        // handleLogin()
-
-        // wx.navigateTo({
-        //   url: '/pages/login/login',
-        // })
-				// return
+        handleLogin()
       }
 
       // A00005 服务器出了点小差
