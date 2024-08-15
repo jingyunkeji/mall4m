@@ -19,7 +19,8 @@
     "pages/login/login",
     "pages/prod-classify/prod-classify",
     "pages/recent-news/recent-news",
-    "pages/news-detail/news-detail"
+    "pages/news-detail/news-detail",
+    "pages/policy/policy"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,4 @@
+<!--pages/policy/policy.wxml-->
+<view class=".container">
+  <h2>隐私政策</h2>
+</view>

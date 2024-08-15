@@ -13,9 +13,6 @@
   height: 56px;
 }
 
-.container {
-  display: flex;
-}
 
 /* image {
   display: block;
@@ -160,3 +157,32 @@ button::after{
 	font-size: 28rpx;
 	color: #00AAFF;
 } */
+
+/* custom */
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.login-button {
+  width: 60%;
+  border-radius: 1rem;
+}
+
+.check {
+  margin: 2rem;
+  font-size: 0.75rem;
+  color: grey;
+  /* width: 100%; */
+  /* flex-wrap: nowrap; */
+  /* display: flex; */
+  /* flex-direction: row; */
+}
+
+navigator {
+  display: inline;
+  color: #ff5555;
+}

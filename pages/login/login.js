@@ -1,3 +1,4 @@
+import { handleLogin, handleLoginTest } from "../../utils/login";
 var http = require("../../utils/http.js");
 var crypto = require("../../utils/crypto.js");
 
@@ -19,6 +20,7 @@ Page({
     // 是否显示注册
     isRegister: false,
     theme: wx.getSystemInfoSync().theme,
+    agree: false,
   },
 
   onChooseAvatar(e) {
@@ -52,37 +54,37 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {},
+  onReady: function () { },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {},
+  onShow: function () { },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {},
+  onHide: function () { },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {},
+  onUnload: function () { },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {},
+  onPullDownRefresh: function () { },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {},
+  onReachBottom: function () { },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {},
+  onShareAppMessage: function () { },
 
   /**
    * 输入框的值
@@ -189,6 +191,33 @@ Page({
           console.log("登录失败！" + res.errMsg);
         }
       },
+    });
+  },
+  handleCheckboxChange() {
+    this.setData({ agree: !this.data.agree });
+  },
+
+  handleProfile() {
+    wx.getUserProfile({
+      desc: "登录验证",
+      success: (res) => {
+        const { userInfo } = res;
+        // userInfo example
+        // {
+        //   nickName: "example",
+        //   language: "zh_CN",
+        //   avatarUrl: "https://github.com/example.png",
+        // };
+        wx.setStorageSync('userInfo', userInfo);
+        console.log('save userInfo storage', userInfo);
+
+        handleLoginTest();
+
+        wx.switchTab({ url: "/pages/index/index" });
+      },
+      fail: (err) => {
+        console.log('getUserProfile fail');
+      }
     });
   },
 });

@@ -1,3 +1,5 @@
+import { handleLogin, handleLoginTest } from "./login";
+
 var config = require("config.js");
 
 //统一的网络请求方法
@@ -32,10 +34,13 @@ function request(params, isGetTonken) {
 
       // A00004 未授权
       if (responseData.code === 'A00004') {
-        wx.navigateTo({
-          url: '/pages/login/login',
-        })
-				return
+        handleLoginTest()
+        // handleLogin()
+
+        // wx.navigateTo({
+        //   url: '/pages/login/login',
+        // })
+				// return
       }
 
       // A00005 服务器出了点小差

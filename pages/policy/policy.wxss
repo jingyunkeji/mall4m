@@ -1,0 +1,8 @@
+/* pages/policy/policy.wxss */
+.container {
+  margin: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
