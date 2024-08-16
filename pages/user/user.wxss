@@ -25,6 +25,11 @@ page {
   margin: auto;
 }
 
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
 .userinfo .userinfo-name {
   font-size: 30rpx;
   font-weight: bold;

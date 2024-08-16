@@ -28,8 +28,8 @@ export const handleLogin = () => {
           data: {
             userName: res.code,
             passWord: crypto.encrypt(defaultPassword),
+            img: avatarUrl,
             nickName,
-            avatarUrl,
           },
           success: (res) => {
             console.log("[login] res: ", res);

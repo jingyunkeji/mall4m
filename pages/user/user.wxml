@@ -3,13 +3,10 @@
   <!-- 用户信息 -->
   <view class='userinfo'>
     <view class='userinfo-avatar'>
-      <!-- todo)) get avatar by server -->
-      <!-- <image class="avatar" src="{{avatarUrl}}"></image> -->
-      <open-data type="userAvatarUrl"></open-data>
+      <image class="avatar" src="{{avatarUrl}}"></image>
     </view>
     <view class='userinfo-name'>
-      <!-- <text>name</text> -->
-      <open-data type="userNickName"></open-data>
+      <text>{{nickName}}</text>
     </view>
   </view>
   <!-- <view class='binding-phone'>
