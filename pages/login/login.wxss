@@ -10,6 +10,7 @@
 .login-button {
   width: 60%;
   border-radius: 1rem;
+  margin-top: 2.5rem;
 }
 
 .check {
@@ -21,4 +22,17 @@
 navigator {
   display: inline;
   color: #ff5555;
+}
+
+.avatar-wrapper {
+  padding: 0;
+  width: 56px !important;
+  border-radius: 8px;
+  margin-bottom: 2.5rem;
+}
+
+.avatar {
+  display: block;
+  width: 56px;
+  height: 56px;
 }

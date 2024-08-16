@@ -1,10 +1,20 @@
 <!-- pages/login/login.wxml -->
 <view data-weui-theme="{{theme}}" class="container">
-    <button class="btn login-button" type="primary" bindtap="handleProfile" disabled="{{!agree}}">
-        一键登录
-    </button>
-    <checkbox class="check" checked="{{agree}}" bind:touchend="handleCheckboxChange">
-        阅读并同意
-        <navigator url="/pages/policy/policy">隐私政策</navigator>
-    </checkbox>
+  <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="avatar" src="{{avatarUrl}}"></image>
+  </button>
+  <mp-form>
+    <mp-cells>
+      <mp-cell title="昵称">
+        <input type="nickname" class="weui-input" placeholder="请输入昵称" value="{{nickName}}" bindblur="handleInput" />
+      </mp-cell>
+    </mp-cells>
+  </mp-form>
+  <button class="btn login-button" type="primary" bindtap="handleProfile" disabled="{{loginDisable}}">
+    一键登录
+  </button>
+  <checkbox class="check" checked="{{agree}}" bind:touchend="handleCheckboxChange">
+    阅读并同意
+    <navigator url="/pages/policy/policy">隐私政策</navigator>
+  </checkbox>
 </view>

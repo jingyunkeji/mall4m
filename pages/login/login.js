@@ -1,14 +1,18 @@
 import { handleLogin } from "../../utils/login";
 
-var http = require("../../utils/http.js");
-var crypto = require("../../utils/crypto.js");
+const defaultAvatarUrl =
+  "https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0";
 
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    avatarUrl: defaultAvatarUrl,
+    nickName: "",
+    theme: wx.getSystemInfoSync().theme,
     agree: false,
+    loginDisable: true,
   },
 
   /**
@@ -51,31 +55,51 @@ Page({
    */
   onShareAppMessage: function () {},
 
+  checkLoginDisable() {
+    const { nickName, avatarUrl, agree } = this.data;
+
+    const loginDisable = !(
+      agree &&
+      nickName.length > 0 &&
+      avatarUrl !== defaultAvatarUrl
+    );
+
+    this.setData({ loginDisable });
+
+    return loginDisable;
+  },
+
+  onChooseAvatar(e) {
+    const { avatarUrl } = e.detail;
+    this.setData({ avatarUrl });
+    this.checkLoginDisable();
+  },
+
+  handleInput(e) {
+    console.log("handleInput", e);
+    this.setData({ nickName: e.detail.value });
+    this.checkLoginDisable();
+  },
+
   handleCheckboxChange() {
     this.setData({ agree: !this.data.agree });
+    this.checkLoginDisable();
   },
 
   handleProfile() {
-    wx.getUserProfile({
-      desc: "登录验证",
-      success: (res) => {
-        const { userInfo } = res;
-        // userInfo example
-        // {
-        //   nickName: "example",
-        //   language: "zh_CN",
-        //   avatarUrl: "https://github.com/example.png",
-        // };
-        wx.setStorageSync("userInfo", userInfo);
-        console.log("save userInfo storage", userInfo);
+    if (this.checkLoginDisable()) {
+      console.log("参数不全，请输入");
+      return;
+    }
 
-        handleLogin();
+    const { nickName, avatarUrl } = this.data;
+    const userInfo = { nickName, avatarUrl };
 
-        wx.switchTab({ url: "/pages/index/index" });
-      },
-      fail: (err) => {
-        console.log("[wx.getUserProfile fail]", err);
-      },
-    });
+    wx.setStorageSync("userInfo", userInfo);
+    console.log("save userInfo storage", userInfo);
+
+    handleLogin();
+
+    wx.switchTab({ url: "/pages/index/index" });
   },
 });
